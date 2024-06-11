@@ -11,7 +11,10 @@ const app = new Hono<{
   };
 }>();
 
-app.post("/api/v1/signup", async (c) => {
+app.get("/", (c) => {
+  return c.text("Hello");
+});
+app.post("/api/v1/user/signup", async (c) => {
   const prisma = new PrismaClient({
     datasourceUrl: c.env?.DATABASE_URL,
   }).$extends(withAccelerate());
@@ -31,3 +34,5 @@ app.post("/api/v1/signup", async (c) => {
     return c.json({ error: "error while signing up" });
   }
 });
+
+export default app;

@@ -4,7 +4,10 @@
     "deploy": "wrangler deploy --minify src/index.ts"
   },
   "dependencies": {
+    "@issac-shaik/epistle-common": "^1.0.2",
+    "@prisma/client": "^5.15.0",
     "@prisma/extension-accelerate": "^1.1.0",
+    "client": "^0.0.1",
     "git-filter-repo": "^0.0.30",
     "hono": "^4.4.4",
     "prisma": "^5.15.0"

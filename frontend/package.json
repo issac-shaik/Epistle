@@ -9,6 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
+  "proxy": "https://anon.issac-shaik.workers.dev",
   "dependencies": {
     "@issac-shaik/epistle-common": "^1.0.2",
     "@types/node": "^20.14.2",
@@ -18,6 +19,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.1",
+    "sonner": "^1.5.0",
     "tailwind-merge": "^2.3.0"
   },
   "devDependencies": {

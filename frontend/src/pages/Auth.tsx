@@ -1,8 +1,9 @@
 import { ChangeEvent, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SignupInput } from "@issac-shaik/epistle-common";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
+import { toast } from "sonner";
 
 const Auth = ({ type }: { type: "signup" | "signin" }) => {
   const navigate = useNavigate();
@@ -17,15 +18,20 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
     try {
       const res = await axios.post(
         `${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`,
-        {
-          postInputs,
-        }
+        postInputs
       );
       const jwt = res.data;
       localStorage.setItem("token", jwt);
-      navigate("/blog/bulk");
+      navigate("/blogs/");
+      toast(`Please wait while we sign you in!`, {
+        position: "bottom-center",
+        className: "max-w-fit",
+      });
     } catch (e) {
-      //alert the user that the req did not fail
+      toast(`Incorrect Email Password.`, {
+        position: "bottom-center",
+        className: "max-w-fit",
+      });
     }
   }
 
@@ -35,7 +41,7 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
         <h1 className="text-3xl text-sla font-bold text-center">
           {type === "signup" ? "Create an account" : "Login to your account"}
         </h1>
-        <p className="font-medium text-center pb-10 text-amber-500">
+        <p className="font-medium text-center mt-2 pb-10 text-amber-500">
           {type === "signup" ? "Already have one? " : "Don't have an account? "}
           {type === "signup" ? (
             <Link to={"/signin"} className="underline">
@@ -81,6 +87,7 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
           }}
         />
         <button
+          onClick={sendRequest}
           type="button"
           className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 rounded-lg text-sm px-5 py-2.5 text-center me-2 mt-10 w-full font-semibold border-none"
         >

@@ -16,6 +16,10 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
 
   async function sendRequest() {
     try {
+      toast(`Please wait while we sign you in!`, {
+        position: "bottom-center",
+        className: "max-w-fit",
+      });
       const res = await axios.post(
         `${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`,
         postInputs
@@ -23,10 +27,6 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
       const jwt = res.data;
       localStorage.setItem("token", jwt);
       navigate("/blogs/");
-      toast(`Please wait while we sign you in!`, {
-        position: "bottom-center",
-        className: "max-w-fit",
-      });
     } catch (e) {
       toast(`Incorrect Email Password.`, {
         position: "bottom-center",

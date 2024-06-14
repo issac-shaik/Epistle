@@ -4,7 +4,7 @@
     "deploy": "wrangler deploy --minify src/index.ts"
   },
   "dependencies": {
-    "@issac-shaik/epistle-common": "^1.0.2",
+    "@issac-shaik/epistle-common": "^1.0.4",
     "@prisma/client": "^5.15.0",
     "@prisma/extension-accelerate": "^1.1.0",
     "client": "^0.0.1",

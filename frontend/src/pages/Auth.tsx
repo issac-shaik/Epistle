@@ -12,6 +12,7 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
     name: "",
     username: "",
     password: "",
+    avatarUrl: "https://api.dicebear.com/8.x/croodles/svg?seed=Scarlet",
   });
 
   async function sendRequest() {
@@ -72,6 +73,7 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
             setPostInputs({
               ...postInputs,
               username: e.target.value,
+              avatarUrl: e.target.value,
             });
           }}
         />

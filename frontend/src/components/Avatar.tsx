@@ -38,7 +38,7 @@ export const Avatar = () => {
   console.log(typeof url);
   return (
     <div>
-      <Blogs avatarUrl={url} />
+      <Blogs />
     </div>
   );
 };

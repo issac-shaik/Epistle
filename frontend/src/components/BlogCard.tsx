@@ -1,4 +1,4 @@
-import { Avatar } from "./Avatar";
+import axios from "axios";
 
 interface BlogCardProps {
   authorName: string;
@@ -15,25 +15,35 @@ export const BlogCard = ({
   publishedDate,
   avatarUrl,
 }: BlogCardProps) => {
-  console.log(avatarUrl);
+  //const getAvatarUrl = axios.get("")
   return (
-    <div>
-      <div>{avatarUrl}</div>
-      <div>
-        {authorName} . {publishedDate}
+    <div className="border-b border-b-slate-200 p-4">
+      <div className="flex flex-row items-center">
+        <img
+          className="w-12 h-12 rounded-full"
+          src="https://api.dicebear.com/8.x/croodles/svg?seed=Scar"
+          alt="Rounded avatar"
+        />
+        <div className="font-medium text-md pl-2">{authorName}</div>
+        <div className="pl-2 text-slate-500 text-md">
+          {" "}
+          <span className="font-bold">·</span> {publishedDate}
+        </div>
       </div>
-      <div>{title}</div>
-      <div>
-        {content.length > 100 ? content.slice(0, 100) + "..." : content}
+
+      <div className="font-bold text-2xl">
+        {title.length > 50 ? title.slice(0, 100) + "..." : title}
       </div>
-      <div>
+      <div className="font-normal pt-2">
+        {content.length > 200 ? content.slice(0, 200) + "..." : content}
+      </div>
+      <div className="font-light text-sm pt-4 ">
         {content.length > 250 ? (
           <div>{Math.ceil(content.length / 250)} mins read </div>
         ) : (
           <div> Less than a min read </div>
         )}
       </div>
-      <div className="border border-b-slate-400 h-1 w-full"></div>
     </div>
   );
 };

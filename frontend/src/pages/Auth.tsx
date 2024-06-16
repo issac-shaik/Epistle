@@ -12,7 +12,7 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
     name: "",
     username: "",
     password: "",
-    avatarUrl: "https://api.dicebear.com/8.x/croodles/svg?seed=Scarlet",
+    avatarUrl: "",
   });
 
   async function sendRequest() {
@@ -25,8 +25,14 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
         `${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`,
         postInputs
       );
-      const jwt = res.data;
+
+      // Extract the JWT token from the response
+      const jwt = res.data.jwt;
+
+      // Store the JWT token in localStorage
       localStorage.setItem("token", jwt);
+
+      // Navigate to the blogs page
       navigate("/blogs/");
     } catch (e) {
       toast(`Incorrect Email Password.`, {
@@ -62,6 +68,9 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
               setPostInputs({
                 ...postInputs,
                 name: e.target.value,
+                avatarUrl:
+                  "https://api.dicebear.com/8.x/croodles/svg?seed=" +
+                  e.target.value,
               });
             }}
           />
@@ -73,7 +82,6 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
             setPostInputs({
               ...postInputs,
               username: e.target.value,
-              avatarUrl: e.target.value,
             });
           }}
         />

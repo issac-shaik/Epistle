@@ -1,3 +1,19 @@
+import { Appbar } from "../components/Appbar";
+import { MainBlog } from "../components/MainBlog";
+import { useBlog } from "../hooks";
+import { useParams } from "react-router-dom";
 export const Blog = () => {
-  return <div>Blog</div>;
+  const { id } = useParams();
+  const { loading, blog } = useBlog({
+    id: Number(id || ""),
+  });
+  if (loading) {
+    return <div>loading...</div>;
+  }
+  return (
+    <div className="h-screen bg-black">
+      <Appbar />
+      <MainBlog />
+    </div>
+  );
 };

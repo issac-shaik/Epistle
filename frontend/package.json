@@ -11,7 +11,7 @@
   },
   "proxy": "https://anon.issac-shaik.workers.dev",
   "dependencies": {
-    "@issac-shaik/epistle-common": "^1.0.4",
+    "@issac-shaik/epistle-common": "^1.0.6",
     "@types/node": "^20.14.2",
     "axios": "^1.7.2",
     "clsx": "^2.1.1",

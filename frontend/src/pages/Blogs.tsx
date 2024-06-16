@@ -1,44 +1,29 @@
 import { Appbar } from "../components/Appbar";
 import { BlogCard } from "../components/BlogCard";
+import { useBlogs } from "../hooks";
 
 export const Blogs = () => {
+  const { blogs, loading } = useBlogs();
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <Appbar />
       <div className="flex justify-center">
         <div className="max-w-2xl">
-          <BlogCard
-            authorName={"Issac"}
-            title={"Getting started with Apache Kafka"}
-            content={
-              " around 300-400 wpm Speed Reader: Some people who practice speed reading can reach speeds of 500-700 wpm or more These figures provide a general guideline and can vary from around 300-400 wpm Speed Reader: Some people who practicearound 300-400 wpm Speed Reader: Some people who practicearound 300-400 wpm Speed Reader: Some people who practicearound 300-400 wpm Speed Reader: Some people who practicearound 300-400 wpm Speed Reader: Some people who practicearound 300-400 wpm Speed Reader: Some people who practice person to person."
-            }
-            publishedDate={"13th Oct 2023"}
-          />
-          <BlogCard
-            authorName={"Issac"}
-            title={"Getting started with Apache Kafka"}
-            content={
-              " around 300-400 wpm Speed Reader: Some people who practice speed reading can reach speeds of 500-700 wpm or more These figures provide a general guideline and can vary from around 300-400 wpm Speed Reader: Some people who practicearound 300-400 wpm Speed Reader: Some people who practicearound 300-400 wpm Speed Reader: Some people who practicearound 300-400 wpm Speed Reader: Some people who practicearound 300-400 wpm Speed Reader: Some people who practicearound 300-400 wpm Speed Reader: Some people who practice person to person."
-            }
-            publishedDate={"13th Oct 2023"}
-          />
-          <BlogCard
-            authorName={"Issac"}
-            title={"Getting started with Apache Kafka"}
-            content={
-              " around 300-400 wpm Speed Reader: Some people who practice speed reading can reach speeds of 500-700 wpm or more These figures provide a general guideline and can vary from around 300-400 wpm Speed Reader: Some people who practicearound 300-400 wpm Speed Reader: Some people who practicearound 300-400 wpm Speed Reader: Some people who practicearound 300-400 wpm Speed Reader: Some people who practicearound 300-400 wpm Speed Reader: Some people who practicearound 300-400 wpm Speed Reader: Some people who practice person to person."
-            }
-            publishedDate={"13th Oct 2023"}
-          />
-          <BlogCard
-            authorName={"Issac"}
-            title={"Getting started with Apache Kafka"}
-            content={
-              " around 300-400 wpm Speed Reader: Some people who practice speed reading can reach speeds of 500-700 wpm or more These figures provide a general guideline and can vary from around 300-400 wpm Speed Reader: Some people who practicearound 300-400 wpm Speed Reader: Some people who practicearound 300-400 wpm Speed Reader: Some people who practicearound 300-400 wpm Speed Reader: Some people who practicearound 300-400 wpm Speed Reader: Some people who practicearound 300-400 wpm Speed Reader: Some people who practice person to person."
-            }
-            publishedDate={"13th Oct 2023"}
-          />
+          {blogs.map((blog) => (
+            <BlogCard
+              id={blog.id}
+              avatarUrl={blog.author.avatarUrl}
+              authorName={blog.author.name || "Anonymous"}
+              title={blog.title}
+              content={blog.content}
+              timePublished={blog.timePublished || "June 13, 2024"}
+            />
+          ))}
         </div>
       </div>
     </div>

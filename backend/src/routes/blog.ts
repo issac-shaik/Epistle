@@ -33,6 +33,7 @@ blogRouter.use("/*", async (c, next) => {
 
 //create blog
 blogRouter.post("/", async (c) => {
+  const time = Date.now();
   const body = await c.req.json();
   const { success } = createBlogInput.safeParse(body);
   if (!success) {
@@ -50,6 +51,7 @@ blogRouter.post("/", async (c) => {
       title: body.title,
       content: body.content,
       authorId: Number(authorId),
+      timePublished: new Date(time),
     },
   });
   return c.json({
@@ -105,6 +107,7 @@ blogRouter.get("/bulk", async (c) => {
         content: true,
         title: true,
         id: true,
+        timePublished: true,
         author: {
           select: {
             name: true,
@@ -140,6 +143,7 @@ blogRouter.get("/:id", async (c) => {
       select: {
         id: true,
         title: true,
+        timePublished: true,
         content: true,
         author: {
           select: {

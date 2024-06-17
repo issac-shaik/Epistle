@@ -17,18 +17,6 @@ export const BlogCard = ({
   timePublished,
   avatarUrl,
 }: BlogCardProps) => {
-  const timestamp = Date.now();
-
-  // Create a Date object from the timestamp
-  const date = new Date(timestamp);
-
-  // Extract the day, month, and year
-  const day = String(date.getDate()).padStart(2, "0"); // Returns day of the month (1-31)
-  const month = String(date.getMonth() + 1).padStart(2, "0"); // Returns month (0-11), so add 1
-  const year = date.getFullYear(); // Returns the full year (e.g., 2024)
-
-  // Format the date into dd/mm/yyyy
-  const formattedDate = `${day}/${month}/${year}`;
   return (
     <Link to={`/blog/${id}`}>
       <div className="border-b border-b-slate-200 p-4 cursor-pointer">

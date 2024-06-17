@@ -11,9 +11,9 @@ export const Blog = () => {
     return <div>loading...</div>;
   }
   return (
-    <div className="h-screen bg-black">
+    <div className="h-screen">
       <Appbar />
-      <MainBlog />
+      <MainBlog blog={blog} />
     </div>
   );
 };

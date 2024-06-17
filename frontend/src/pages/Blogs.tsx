@@ -16,11 +16,14 @@ export const Blogs = () => {
         <div className="max-w-2xl">
           {blogs.map((blog) => (
             <BlogCard
-              id={blog.id}
-              avatarUrl={blog.author.avatarUrl}
+              id={blog.id || Number("1")}
+              avatarUrl={blog.author.avatarUrl || "avatar"}
               authorName={blog.author.name || "Anonymous"}
-              title={blog.title}
-              content={blog.content}
+              title={blog.title || "How to get rich in 2024"}
+              content={
+                blog.content ||
+                "To be financially secure, you need to keep investing"
+              }
               timePublished={blog.timePublished || "June 13, 2024"}
             />
           ))}

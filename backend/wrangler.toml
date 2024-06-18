@@ -2,8 +2,8 @@ name = "anon"
 compatibility_date = "2023-12-01"
 
 [vars]
-DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiZjAzOTQ1OGEtNTdlOS00NjlkLTljNWMtYmE4Yzg0MjY3ZTg0IiwidGVuYW50X2lkIjoiNGEwOTg3NjhmOTE5NDYxZjU5MTljMWI3ODEwYjM3NWFjZThmYTAyYzZlNTc0YWRkZTFiMmRlZmVhZjdmYTkzMCIsImludGVybmFsX3NlY3JldCI6ImVlM2U0NzE1LTAxMWYtNDRiNS1hZmY2LWUzZTJlYTcyMjQzNyJ9.IJB3V599TMQJxn_nUuY7xc271TqdU4fh3tgiawHQsrc"
-JWT_SECRET="issacsecret"
+DATABASE_URL=""
+JWT_SECRET=""
 
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"

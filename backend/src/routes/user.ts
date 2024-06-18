@@ -33,7 +33,11 @@ userRouter.post("/signup", async (c) => {
         avatarUrl: body.avatarUrl,
       },
     });
-    const jwt = await sign({ id: user.id }, c.env.JWT_SECRET);
+    const jwtPayload = {
+      id: user.id,
+      avatarUrl: user.avatarUrl,
+    };
+    const jwt = await sign(jwtPayload, c.env.JWT_SECRET);
     return c.json({ jwt });
   } catch (e) {
     console.error(e);

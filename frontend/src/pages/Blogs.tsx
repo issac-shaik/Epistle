@@ -11,9 +11,9 @@ export const Blogs = () => {
 
   return (
     <div>
-      <Appbar />
+      <Appbar blog={blogs} />
       <div className="flex justify-center">
-        <div className="max-w-2xl">
+        <div className="max-w-2xl mx-4 sm:mx-10 cursor-pointer pt-4">
           {blogs.map((blog) => (
             <BlogCard
               id={blog.id || Number("1")}

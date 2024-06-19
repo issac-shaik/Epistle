@@ -1,7 +1,7 @@
 import { Appbar } from "../components/Appbar";
 import { MainBlog } from "../components/MainBlog";
 import { useBlog } from "../hooks";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 export const Blog = () => {
   const { id } = useParams();
   const { loading, blog } = useBlog({
@@ -12,7 +12,9 @@ export const Blog = () => {
   }
   return (
     <div className="h-screen">
-      <Appbar />
+      <Link to={"/blogs"}>
+        <Appbar blog={blog} />
+      </Link>
       <MainBlog blog={blog} />
     </div>
   );

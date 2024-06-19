@@ -17,21 +17,44 @@ export const BlogCard = ({
   timePublished,
   avatarUrl,
 }: BlogCardProps) => {
+  const isoDateString = "2024-06-17T11:50:35.502Z";
+
+  // Convert ISO string to Date object
+  const date = new Date(isoDateString);
+
+  // Create a new Date object for IST using UTC methods
+  const istOffset = 5.5 * 60 * 60 * 1000; // IST offset in milliseconds
+  const istDate = new Date(date.getTime() + istOffset);
+
+  // Format the date to a human-readable string without the time zone and seconds
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: "Asia/Kolkata", // Ensure the correct time zone is used for formatting
+  };
+
+  const formattedDate = new Intl.DateTimeFormat("en-IN", options).format(
+    istDate
+  );
   return (
     <Link to={`/blog/${id}`}>
-      <div className="border-b border-b-slate-200 p-4 cursor-pointer">
+      <div className="border-b border-b-slate-200 mt-4">
         <div className="flex flex-row items-center">
           <div>
             <img
               className="w-12 h-12 rounded-full hover:cursor-pointer border"
-              src={`https://api.dicebear.com/8.x/croodles/svg?seed=${avatarUrl}`}
+              src={avatarUrl}
               alt="https://api.dicebear.com/8.x/croodles/svg?seed=Anonymous"
             />
           </div>
           <div className="font-medium text-md pl-2">{authorName}</div>
           <div className="pl-2 text-slate-500 text-md">
             {" "}
-            <span className="font-bold">·</span> {timePublished}
+            <span className="font-bold">·</span> {formattedDate}
           </div>
         </div>
 

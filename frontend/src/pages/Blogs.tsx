@@ -16,6 +16,7 @@ export const Blogs = () => {
         <div className="max-w-2xl mx-4 sm:mx-10 cursor-pointer pt-4">
           {blogs.map((blog) => (
             <BlogCard
+              key={blog.id}
               id={blog.id || Number("1")}
               avatarUrl={blog.author.avatarUrl || "avatar"}
               authorName={blog.author.name || "Anonymous"}

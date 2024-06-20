@@ -17,14 +17,14 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
 
   async function sendRequest() {
     try {
-      toast(`Please wait while we sign you in!`, {
-        position: "bottom-center",
-        className: "max-w-fit",
-      });
       const res = await axios.post(
         `${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`,
         postInputs
       );
+      toast(`Please wait while we sign you in!`, {
+        position: "bottom-center",
+        className: "max-w-fit",
+      });
 
       // Extract the JWT token from the response
       const jwt = res.data.jwt;
@@ -35,7 +35,7 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
       // Navigate to the blogs page
       navigate("/blogs/");
     } catch (e) {
-      toast(`Incorrect Email Password.`, {
+      toast(`Incorrect Email or Password.`, {
         position: "bottom-center",
         className: "max-w-fit",
       });
@@ -86,7 +86,7 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
           }}
         />
         <LabelledInput
-          label="Password"
+          label="Password (min 6 chars)"
           type="password"
           placeholder="Enter your password"
           onChange={(e) => {

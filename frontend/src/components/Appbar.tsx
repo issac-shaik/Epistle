@@ -1,13 +1,20 @@
 import { Link } from "react-router-dom";
 import Epistle from "../Epistle.svg";
 import Profile_icon from "../Profile_icon.png";
+import { useEffect, useState } from "react";
+import { BACKEND_URL } from "../config";
+import axios from "axios";
 
 export const Appbar = () => {
+  const [avatar, setAvatar] = useState("");
+  useEffect(() => {
+    const res = axios.get(`${BACKEND_URL}/`);
+  });
   return (
-    <div className="border-b flex justify-between bg-white">
+    <div className="border-b flex justify-between bg-slate-100">
       <div>
         <img
-          className="w-16 h-16 rounded-full"
+          className="w-16 h-16 rounded-full cursor-pointer"
           src={Epistle}
           alt="Rounded avatar"
         />
@@ -21,7 +28,7 @@ export const Appbar = () => {
         <div className="mt-3">
           <Link to={"/publish"}>
             <button
-              className="select-none rounded-full bg-gradient-to-tr from-gray-900 to-gray-800 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              className="select-none rounded-full bg-gradient-to-tr from-sky-400 to-sky-800 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-black shadow-md shadow-gray-200/10 transition-all hover:shadow-lg hover:shadow-gray-200/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               type="button"
             >
               Create

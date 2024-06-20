@@ -23,7 +23,7 @@ export const BlogCard = ({
   const date = new Date(isoDateString);
 
   // Create a new Date object for IST using UTC methods
-  const istOffset = 60 * 1000; // IST offset in milliseconds
+  const istOffset = 60 * 900; // IST offset in milliseconds
   const istDate = new Date(date.getTime() + istOffset);
 
   // Format the date to a human-readable string without the time zone and seconds
@@ -40,6 +40,10 @@ export const BlogCard = ({
   const formattedDate = new Intl.DateTimeFormat("en-IN", options).format(
     istDate
   );
+
+  const truncatedContent =
+    content.length > 500 ? content.slice(0, 500) + "..." : content;
+
   return (
     <Link to={`/blog/${id}`}>
       <div className="border-b border-b-slate-200 mt-4 bg-black text-white">
@@ -53,7 +57,6 @@ export const BlogCard = ({
           </div>
           <div className="font-medium text-md pl-2">{authorName}</div>
           <div className="pl-2 text-slate-500 text-md">
-            {" "}
             <span className="font-bold">·</span> {formattedDate}
           </div>
         </div>
@@ -62,11 +65,15 @@ export const BlogCard = ({
           {title.length > 50 ? title.slice(0, 100) + "..." : title}
         </div>
         <div className="font-normal pt-2">
-          {content.length > 200 ? content.slice(0, 200) + "..." : content}
+          {content.length > 500 ? (
+            <div dangerouslySetInnerHTML={{ __html: truncatedContent }} />
+          ) : (
+            <div dangerouslySetInnerHTML={{ __html: content }} />
+          )}
         </div>
         <div className="font-light text-sm pt-4 pb-4">
-          {content.length > 1000 ? (
-            <div>{Math.ceil(content.length / 1500)} mins read </div>
+          {content.length > 2000 ? (
+            <div>{Math.ceil(content.length / 2000)} min(s) read </div>
           ) : (
             <div> Less than a min read </div>
           )}

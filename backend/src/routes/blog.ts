@@ -163,3 +163,42 @@ blogRouter.get("/:id", async (c) => {
     });
   }
 });
+
+//Fetch all blogs by a user
+blogRouter.get("/getuser", async (c) => {
+  const userId = c.get("userId");
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+  }).$extends(withAccelerate());
+
+  try {
+    const blogs = await prisma.post.findMany({
+      where: {
+        authorId: Number(userId),
+      },
+      select: {
+        content: true,
+        title: true,
+        id: true,
+      },
+    });
+    const user = await prisma.user.findUnique({
+      where: {
+        id: Number(userId),
+      },
+      select: {
+        name: true,
+        avatarUrl: true,
+      },
+    });
+    return c.json({
+      blogs,
+      user,
+    });
+  } catch (e) {
+    c.status(411);
+    return c.json({
+      message: "Error while fetching blog posts",
+    });
+  }
+});

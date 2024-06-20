@@ -1,4 +1,5 @@
 import { Appbar } from "../components/Appbar";
+import MainBlogShimmer from "../components/MainBlogShimmer";
 import { MainBlog } from "../components/MainBlog";
 import { useBlog } from "../hooks";
 import { Link, useParams } from "react-router-dom";
@@ -8,7 +9,11 @@ export const Blog = () => {
     id: Number(id || ""),
   });
   if (loading) {
-    return <div>loading...</div>;
+    return (
+      <div>
+        <MainBlogShimmer />
+      </div>
+    );
   }
   return (
     <div className="h-screen">

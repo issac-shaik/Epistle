@@ -43,7 +43,7 @@ export function Publish() {
             }}
             type="text"
             placeholder="Enter the blog title"
-            className="mt-10 py-2 px-4 rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500  w-full relative z-10  bg-neutral-700 text-neutral-200 placeholder:text-neutral-200"
+            className="mt-10 py-2 px-4 rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500  w-full relative z-10  bg-white text-black placeholder:text-neutral-400"
           />
           {/* TEXT EDITOR */}
           <div className="mt-5 relative z-10  text-neutral-200">
@@ -60,7 +60,11 @@ export function Publish() {
               >
                 <Editor
                   containerProps={{
-                    style: { resize: "vertical", backgroundColor: "#3f3f46" },
+                    style: {
+                      resize: "vertical",
+                      backgroundColor: "#ffffff",
+                      color: "#000000",
+                    },
                   }}
                   value={description}
                   onChange={onChange}

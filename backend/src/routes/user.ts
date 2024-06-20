@@ -38,7 +38,7 @@ userRouter.post("/signup", async (c) => {
       avatarUrl: user.avatarUrl,
     };
     const jwt = await sign(jwtPayload, c.env.JWT_SECRET);
-    return c.json({ jwt });
+    return c.json({ jwt, jwtPayload });
   } catch (e) {
     console.error(e);
     c.status(403);
@@ -82,5 +82,51 @@ userRouter.post("/signin", async (c) => {
     console.log(e);
     c.status(403);
     return c.json({ error: "error while signing in" });
+  }
+});
+
+//get all users
+userRouter.get("/users", async (c) => {
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env?.DATABASE_URL,
+  }).$extends(withAccelerate());
+
+  try {
+    const users = await prisma.user.findMany();
+    return c.json(users);
+  } catch (e) {
+    console.error(e);
+    c.status(500);
+    return c.json({ error: "error while fetching users" });
+  } finally {
+    await prisma.$disconnect();
+  }
+});
+
+userRouter.get("/users/:id", async (c) => {
+  const { id } = c.req.param();
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env?.DATABASE_URL,
+  }).$extends(withAccelerate());
+
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: Number(id),
+      },
+    });
+
+    if (!user) {
+      c.status(404);
+      return c.json({ error: "User not found" });
+    }
+
+    return c.json(user);
+  } catch (e) {
+    console.error(e);
+    c.status(500);
+    return c.json({ error: "error while fetching user" });
+  } finally {
+    await prisma.$disconnect();
   }
 });

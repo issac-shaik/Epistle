@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Epistle from "../Epistle.png";
 import { useEffect, useState } from "react";
 import { decodeToken, fetchUserData } from "./utils/auth";
@@ -6,7 +6,9 @@ import { decodeToken, fetchUserData } from "./utils/auth";
 export const Appbar = () => {
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [name, setName] = useState("");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getUserAvatar = async () => {
@@ -24,17 +26,27 @@ export const Appbar = () => {
 
     getUserAvatar();
   }, [token]);
+
+  const handleAvatarClick = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
+
   if (!avatarUrl) {
     return <p>Loading...</p>;
   }
 
   return (
-    <div className=" border-b flex items-center   justify-between bg-white rounded-md mx-4 mt-6">
+    <div className="border-b flex items-center justify-between bg-white rounded-md mx-4 mt-6">
       <div>
         <img
           className="m-4 h-11 w-32 cursor-pointer"
           src={Epistle}
-          alt="Rounded avatar"
+          alt="Epistle logo"
         />
       </div>
       <div className="flex">
@@ -48,15 +60,26 @@ export const Appbar = () => {
             </button>
           </Link>
         </div>
-        <div className="flex flex-col">
+        <div className="relative">
           <img
-            className="w-16 h-16 mx-4 justify-center border rounded-full"
+            className="w-16 h-16 mx-4 cursor-pointer border rounded-full"
             src={avatarUrl}
             alt="Rounded avatar"
+            onClick={handleAvatarClick}
           />
           <h2 className="text-center mx-4 font-semibold text-black text-sm mr-4">
             {name}
           </h2>
+          {dropdownOpen && (
+            <div className="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg">
+              <button
+                className="block w-full text-left px-4 py-2 text-black hover:bg-gray-200"
+                onClick={handleSignOut}
+              >
+                Sign Out
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

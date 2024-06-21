@@ -1,4 +1,4 @@
-const MainBlogShimmer = () => {
+export const MainBlogShimmer = () => {
   return (
     <div className="flex flex-col justify-center items-center px-10 md:px-48 mx-auto max-w-screen-lg min-h-screen">
       <div className="mt-12 w-full">

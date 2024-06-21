@@ -21,7 +21,7 @@ export const Blogs = () => {
 
   return (
     <div>
-      <Appbar blog={blogs} />
+      <Appbar />
       <div className="flex justify-center">
         <div className="max-w-2xl mx-4 sm:mx-10 cursor-pointer pt-4">
           {blogs

@@ -3,7 +3,7 @@ import { Appbar } from "../components/Appbar";
 import { BackgroundBeams } from "../components/ui/backgroundbeams";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import {
   Editor,
   BtnBold,
@@ -20,10 +20,10 @@ import {
 export function Publish() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [timePublished, setTimePublished] = useState("");
+  const timePublished = "";
   const navigate = useNavigate();
 
-  function onChange(e) {
+  function onChange(e: { target: { value: SetStateAction<string> } }) {
     setDescription(e.target.value);
   }
   return (

@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import Epistle from "../Epistle.png";
-import Profile_icon from "../Profile_icon.png";
 import { useEffect, useState } from "react";
 import { decodeToken, fetchUserData } from "./utils/auth";
 
@@ -14,7 +13,7 @@ export const Appbar = () => {
       if (token) {
         const userId = decodeToken(token);
         if (userId) {
-          const userData = await fetchUserData(userId, token);
+          const userData = await fetchUserData(userId);
           if (userData && userData.data.avatarUrl && userData.data.name) {
             setAvatarUrl(userData.data.avatarUrl);
             setName(userData.data.name);

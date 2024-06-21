@@ -27,7 +27,7 @@ export const BlogCard = ({
   const istDate = new Date(date.getTime() + istOffset);
 
   // Format the date to a human-readable string without the time zone and seconds
-  const options = {
+  const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
     month: "long",
     day: "numeric",

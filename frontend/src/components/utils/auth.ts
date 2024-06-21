@@ -1,9 +1,13 @@
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 
-export const decodeToken = (token) => {
+interface DecodedToken {
+  id: string;
+}
+
+export const decodeToken = (token: string): string | null => {
   try {
-    const decoded = jwtDecode(token);
+    const decoded = jwtDecode<DecodedToken>(token);
     return decoded.id; // Assuming the token has an `id` field
   } catch (error) {
     console.error("Invalid token:", error);
@@ -11,7 +15,7 @@ export const decodeToken = (token) => {
   }
 };
 
-export const fetchUserData = async (userId: number) => {
+export const fetchUserData = async (userId: string) => {
   try {
     const response = await axios.get(
       `https://anon.issac-shaik.workers.dev/api/v1/user/users/${userId}`,

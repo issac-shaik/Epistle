@@ -27,7 +27,7 @@ export const MainBlog = ({ blog }: { blog: Blog }) => {
   );
 
   return (
-    <div className="flex flex-col  justify-between">
+    <div className="flex flex-col  justify-between text-slate-300">
       <div className="px-10 md:px-48 mx-auto max-w-screen-lg flex-grow min-h-screen">
         <div className="mt-12">
           <div className="font-bold pb-10 text-5xl">{blog.title}</div>
